@@ -3,7 +3,7 @@ End-to-end tests for the Workflow Engine.
 
 Run:  python test_all.py
 Requires: pip install requests
-The backend must be running at http://localhost:8000
+The backend must be running at http://localhost:8001
 """
 
 import json

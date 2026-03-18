@@ -4,13 +4,6 @@
 
 **A full-stack workflow automation system with dynamic rule-based execution**
 
-Built for the Halleyx Full Stack Engineer Challenge 2026
-
-![Python]
-![FastAPI]
-![React]
-![SQLite](Temporary Usage)
-![PostgreSQL]
 </div>
 
 ---
@@ -429,21 +422,6 @@ Expected output:
 
 ```
 
-**Test coverage:**
-- Health check
-- Workflow CRUD (create, read, update, delete, search, pagination)
-- Step CRUD with type validation
-- Rule CRUD with priority ordering
-- Rule engine — all operators, functions, DEFAULT, missing fields, syntax errors
-- Execution flow — full traversal, approval pause/resume
-- Input validation — required fields, type checks, allowed values
-- Cancel and retry
-- Audit log filtering
-- Cleanup
-
-> **Note:** Update `BASE = "http://localhost:8001"` on line 1 of `test_all.py` if your backend runs on a different port.
-
----
 
 ## Bugs Found and Fixed
 
@@ -501,39 +479,6 @@ Restart the backend — SQLAlchemy creates all tables automatically on startup. 
 
 ---
 
-## Design Decisions
-
-**Rule engine is a pure function**
-`evaluate_rules(rules, input_data)` has zero database imports. This means it can be unit tested without any database setup, called from `/simulate` without touching executions, and runs with no I/O overhead inside the evaluation loop.
-
-**SQLAlchemy for database abstraction**
-One `DATABASE_URL` string controls everything. SQLite for local development (zero config, single file), PostgreSQL for production. Same models, same queries, same services.
-
-**Approval steps pause and wait**
-When the execution engine reaches an approval step, it writes the step log, advances `current_step_id`, sets status to `pending`, and returns. The workflow resumes when `POST /executions/:id/approve` is called. A human decision never blocks the server thread.
-
-**Versioning is non-destructive**
-`PUT /workflows/:id` increments the `version` field in place. Every execution records the `workflow_version` it ran on. Historical logs are always accurate even after a workflow is later modified.
-
-**Retry is step-level not workflow-level**
-`POST /executions/:id/retry` re-runs only from the failed step. All previously completed steps remain in the log. This preserves the execution history and avoids re-running steps that already succeeded.
-
-**`current_step_id` always points to the failed step**
-When an execution fails, `current_step_id` is explicitly set to the step that caused the failure — not the next step the engine was trying to advance to. This ensures the "Fix Rules on Failed Step" button always navigates to the correct step.
-
----
-
-## UI Design
-
-- **Dark mode** (default) — deep forest green backgrounds with bright green accent (`#34d27a`)
-- **Light mode** — clean off-white with darker green accent (`#1e9e56`) for contrast
-- **Theme toggle** in the sidebar — preference persisted to `localStorage`
-- **Step cards** — colored left border per step type (blue = task, amber = approval, green = notification)
-- **Graph view** — completed nodes turn green, failed red, active node pulses with animation
-- **No external CSS framework** — plain CSS custom properties throughout, full control over every pixel
-
----
-
 ## Sample Workflows
 
 Two workflows are pre-loaded by `seed.py`.
@@ -587,6 +532,4 @@ Route: HR Review (approve) → IT Setup → Welcome Notification → end
 
 ---
 
-## License
 
-Built for the Halleyx Full Stack Engineer Challenge 2026.
