@@ -21,6 +21,7 @@ Think of it as a lightweight version of tools like Zapier or ServiceNow — but 
 ## Live Demo
 
 > ## Live Demo
+> Kindly watch the video in 0.75x or 0.5x for better visibility
 
 [![Demo Video](https://img.shields.io/badge/▶_Watch_Demo-Video-34d27a?style=flat)](https://github.com/Gowtham-exe-tech/Halleyx-workflow-engine/releases/download/v1.0.0/Demo_project_show.mp4)
 
