@@ -20,7 +20,12 @@ Think of it as a lightweight version of tools like Zapier or ServiceNow — but 
 
 ## Live Demo
 
-> Demo video attached in the [Releases](../../releases) section.
+> ## Live Demo
+
+[![Demo Video](https://img.shields.io/badge/▶_Watch_Demo-Video-34d27a?style=flat)](https://github.com/Gowtham-exe-tech/Halleyx-workflow-engine/releases/download/v1.0.0/Demo-workflow.mp4)
+
+> Full walkthrough of all features including workflow creation, rule engine,
+> execution flow, graph view, audit log, and theme toggle.
 
 ---
 
