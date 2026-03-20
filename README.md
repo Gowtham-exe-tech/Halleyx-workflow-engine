@@ -20,13 +20,19 @@ Think of it as a lightweight version of tools like Zapier or ServiceNow — but 
 
 ## Live Demo
 
-> ## Live Demo
+| Service | URL |
+|---------|-----|
+| 🌐 Frontend | [https://deploy-check-workflow.vercel.app](https://deploy-check-workflow.vercel.app) |
+| ⚙ Backend API | [https://halx-workflow-engine.onrender.com](https://halx-workflow-engine.onrender.com) |
+| 📋 API Docs | [https://halx-workflow-engine.onrender.com/docs](https://halx-workflow-engine.onrender.com/docs) |
+
+>**Note:** Backend is hosted on Render free tier. If the app takes 30–60 seconds to load on first visit, please wait — the server is waking up. It works normally after that.
+
+>Deployment configured code is done in repo:(https://github.com/Gowtham-exe-tech/deploy-check-workflow.git)
+
 > Kindly watch the video in 0.75x or 0.5x for better visibility
 
 [![Demo Video](https://img.shields.io/badge/▶_Watch_Demo-Video-34d27a?style=flat)](https://github.com/Gowtham-exe-tech/Halleyx-workflow-engine/releases/download/v1.0.0/Demo_project_show.mp4)
-
-> Full walkthrough of all features including workflow creation, rule engine,
-> execution flow, graph view, audit log, and theme toggle.
 
 ---
 
@@ -516,25 +522,24 @@ Multi-level financial approval based on amount, country, and priority.
 
 ---
 
-### 2 — Employee Onboarding
+## Example — Expense Reimbursement Workflow
 
-Linear onboarding flow with an HR approval gate.
+A real-world workflow to test all features. Create this workflow in the app:
 
-**Input fields:** `employee_name` (string, required) · `department` (string, required) · `role` (string, required)
+**Input:** `employee_name`, `amount` (number), `category` (Travel/Equipment/Medical), `department`
 
-**Steps:** HR Review → IT Setup → Welcome Notification
+**Steps:** Auto Validation → Manager Review → Finance Approval → Director Approval → Payment Processed → Rejected → Complete
 
-**Sample execution:**
+**Sample executions to try:**
 
-```json
-{
-  "employee_name": "Alice Johnson",
-  "department": "Engineering",
-  "role": "Senior Developer"
-}
-```
+| Input | Expected Route |
+|-------|---------------|
+| amount=350, category=Medical | Auto Validation → Payment Processed → Complete *(auto approved)* |
+| amount=750, category=Travel | Auto Validation → Manager Review → Payment Processed → Complete |
+| amount=1500, category=Equipment | Auto Validation → Finance Approval → Payment Processed → Complete |
+| amount=75000, category=Equipment | Auto Validation → Director Approval → Rejected → Complete |
 
-Route: HR Review (approve) → IT Setup → Welcome Notification → end
+> The same workflow produces different routes based on input — all controlled by rules, no code changes needed.
 
 ---
 
